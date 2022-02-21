@@ -15,16 +15,13 @@ public class Weapon
         _bullets = bulletsAmount;
     }
 
-    public void TryFire(Player player)
+    public void Fire(Player player)
     {
-        if (player == null)
+        if (_bullets <= 0)
             throw new NullReferenceException();
 
-        if (_bullets > 0)
-        {
-            _bullets--;
-            player.TakeDamage(_damage);
-        }
+        _bullets--;
+        player.TakeDamage(_damage);
     }
 }
 
@@ -67,6 +64,6 @@ public class Bot
 
     public void OnSeePlayer(Player player)
     {
-        _weapon.TryFire(player);
+        _weapon.Fire(player);
     }
 }
