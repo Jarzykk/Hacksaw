@@ -41,7 +41,6 @@ public class Player
         Health = health;
     }
 
-
     public void TakeDamage(int damage)
     {
         if (_isDead)
