@@ -17,8 +17,11 @@ public class Weapon
 
     public void Fire(Player player)
     {
-        if (_bullets <= 0)
+        if (player == null)
             throw new NullReferenceException();
+
+        if (_bullets <= 0)
+            throw new IndexOutOfRangeException();
 
         _bullets--;
         player.TakeDamage(_damage);
