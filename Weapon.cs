@@ -1,19 +1,25 @@
 public class Weapon
 {
-    private int _damage;
+    private readonly int _damage;
     private int _bullets;
 
     public Weapon(int damage, int bulletsAmount)
     {
-        if (damage <= 0 || bulletsAmount <= 0)
+        if (damage <= 0)
+            throw new ArgumentOutOfRangeException();
+
+        if (bulletsAmount <= 0)
             throw new ArgumentOutOfRangeException();
 
         _damage = damage;
         _bullets = bulletsAmount;
     }
 
-    public void Fire(Player player)
+    public void TryFire(Player player)
     {
+        if(player == null)
+            throw new NullReferenceException();
+
         if (_bullets > 0)
         {
             _bullets--;
@@ -25,7 +31,7 @@ public class Weapon
 public class Player
 {
     public int Health { get; private set; }
-    private bool _isDead = false;
+    private bool _isDead;
 
     public Player(int health)
     {
@@ -33,7 +39,8 @@ public class Player
             throw new ArgumentOutOfRangeException();
 
         Health = health;
-    }
+        private bool _isDead => Health > 0;
+}
 
     public void TakeDamage(int damage)
     {
@@ -69,5 +76,5 @@ public class Bot
 
     public void OnSeePlayer(Player player)
     {
-        _weapon.Fire(player);
+        _weapon.TryFire(player);
     }
