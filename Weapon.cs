@@ -17,11 +17,11 @@ public class Weapon
 
     public void Fire(Player player)
     {
-        if (player == null)
-            throw new NullReferenceException();
+        if(player == null)
+            throw new ArgumentNullException();
 
         if (_bullets <= 0)
-            throw new IndexOutOfRangeException();
+            throw new ArgumentOutOfRangeException();
 
         _bullets--;
         player.TakeDamage(_damage);
@@ -60,7 +60,7 @@ public class Bot
     public Bot(Weapon weapon)
     {
         if (weapon == null)
-            throw new NullReferenceException();
+            throw new ArgumentNullException();
 
         _weapon = weapon;
     }
